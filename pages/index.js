@@ -20,7 +20,7 @@ export default function Home() {
   }, [updated]);
 
   useEffect(async () => {
-    const URL = 'https://api.airtable.com/v0/app7QZH4jTDfsrfbI/expenses?api_key=keyNpEof0EQueF0sv';
+    const URL = 'https://api.airtable.com/v0/app7QZH4jTDfsrfbI/expenses?sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc&api_key=keyNpEof0EQueF0sv';
     const res = await fetch(URL);
     const data = await res.json();
     setExpenses(data.records);

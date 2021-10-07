@@ -5,12 +5,14 @@ import ExpenseList from './ExpenseList';
 const Expenses = ({ expenses, addExpense }) => {
 
     const [date, setDate] = useState();
-    const [category, setCategory] = useState();
-    const [source, setSource] = useState();
+    const [category, setCategory] = useState('Food');
+    const [source, setSource] = useState('kotak');
     const [amount, setAmount] = useState();
     const [desc, setDesc] = useState();
 
     const expenseHandler = () => {
+        amount = amount || 0;
+        desc = desc || 'Expenses hogae';
         addExpense(date, category, source, amount, desc);
         setDate('');
         setCategory('');
@@ -23,8 +25,18 @@ const Expenses = ({ expenses, addExpense }) => {
         <>
             <div className={styles.expense__form}>
                 <input placeholder="Date" className={styles.input} value={date} onChange={(e) => setDate(e.target.value)} type="date"></input>
-                <input placeholder="Category" className={styles.input} value={category} onChange={(e) => setCategory(e.target.value)}></input>
-                <input placeholder="Source" className={styles.input} value={source} onChange={(e) => setSource(e.target.value)}></input>
+                <select placeholder="Category" className={styles.input} value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="Self">Self</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Food">Food</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select>
+                <select placeholder="Source" className={styles.input} value={source} onChange={(e) => setSource(e.target.value)}>
+                    <option value="sbi">State Bank of India</option>
+                    <option value="cash">Cash</option>
+                    <option value="ub">Union Bank</option>
+                    <option value="kotak">Kotak</option>
+                </select>
                 <input placeholder="Amount" className={styles.input} value={amount} onChange={(e) => setAmount(e.target.value)}></input>
                 <input placeholder="Description" className={styles.input} value={desc} onChange={(e) => setDesc(e.target.value)}></input>
                 <button className={styles.button} onClick={expenseHandler}>Add expense</button>
