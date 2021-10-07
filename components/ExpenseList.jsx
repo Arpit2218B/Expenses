@@ -1,7 +1,7 @@
 import styles from '../styles/Expense.module.scss';
 import Expense from './Expense';
 
-const ExpenseList = () => {
+const ExpenseList = ({ expenses }) => {
     return (
         <table className={styles.table}>
             <tr className={styles.tr}>
@@ -11,11 +11,9 @@ const ExpenseList = () => {
                 <td className={styles.th}>Amount</td>
                 <td className={styles.th}>Description</td>
             </tr>
-            <Expense />
-            <Expense />
-            <Expense />
-            <Expense />
-            <Expense />
+            {expenses.map(expense => (
+                <Expense expense={expense} />
+            ))}
         </table>
     )
 }

@@ -1,6 +1,9 @@
 import styles from '../styles/Baseamount.module.scss';
 
-const BaseAmount = () => {
+const BaseAmount = ({ data }) => {
+
+    
+
     return (
         <div className={styles.container}>
             <h1 className={styles.h1}>
@@ -8,23 +11,17 @@ const BaseAmount = () => {
                     Expense Tracker
                 </span>
             </h1>
-            
-            <div className={styles.source}>
-                <span className={styles.label}>Union Bank</span>
-                <input className={styles.input}></input>
-            </div>
-            <div className={styles.source}>
-                <span className={styles.label}>State Bank</span>
-                <input className={styles.input}></input>
-            </div>
-            <div className={styles.source}>
-                <span className={styles.label}>Kotak Bank</span>
-                <input className={styles.input}></input>
-            </div>
-            <div className={styles.source}>
-                <span className={styles.label}>Cash</span>
-                <input className={styles.input}></input>
-            </div>
+
+            {
+                data.map(src => {
+                    return (
+                        <div className={styles.source}>
+                            <span className={styles.label}>{src.fields.Source}</span>
+                            <span className={styles.input}>{src.fields.Amount}</span>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }

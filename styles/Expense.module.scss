@@ -1,5 +1,5 @@
 .table {
-    max-width: 90vw;
+    width: 90vw;
     margin: 0 auto;
     margin-top: 2rem;
     border-collapse: collapse;
@@ -35,6 +35,7 @@
         background-color: var(--secondary-text-color);
         color: var(--primary-color);
         border: none;
+        width: 100%;
 
         &::placeholder {
             color: var(--primary-text-color);
