@@ -8,6 +8,8 @@
 
     .h1 {
         position: relative;
+        display: inline;
+        width: fit-content;
         
         & > * {
             position: relative;
@@ -16,13 +18,13 @@
 
         &::before {
             content: "";
-            width: 19%;
+            width: 100%;
             height: 16px;
             background-color: var(--accent-color);
             opacity: 0.5;
             position: absolute;
             top: 60%;
-            left: 2%;
+            left: 10%;
         }
     }
 
