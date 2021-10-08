@@ -12,7 +12,7 @@ const ExpenseList = ({ expenses }) => {
                 <td className={styles.th}>Description</td>
             </tr>
             {expenses.map(expense => (
-                <Expense expense={expense} />
+                <Expense expense={expense} key={1}/>
             ))}
         </table>
     )
