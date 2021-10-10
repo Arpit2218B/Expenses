@@ -11,7 +11,6 @@ const Expenses = ({ expenses, addExpense }) => {
     const [desc, setDesc] = useState();
 
     const expenseHandler = () => {
-        amount = amount || 0;
         desc = desc || 'Expenses hogae';
         addExpense(date, category, source, amount, desc);
         setDate('');
