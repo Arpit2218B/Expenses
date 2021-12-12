@@ -1,9 +1,6 @@
 import styles from '../styles/Baseamount.module.scss';
 
-const BaseAmount = ({ data }) => {
-
-    
-
+const BaseAmount = ({ data, logout }) => {
     return (
         <div className={styles.container}>
             <h1 className={styles.h1}>
@@ -11,6 +8,7 @@ const BaseAmount = ({ data }) => {
                     Expense Tracker
                 </span>
             </h1>
+            <p className={styles.logout} onClick={logout}>Logout</p>
 
             {
                 data.map(src => {

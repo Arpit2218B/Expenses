@@ -3,28 +3,34 @@ import Head from 'next/head'
 import Image from 'next/image'
 import BaseAmount from '../components/BaseAmount'
 import Expenses from '../components/Expenses'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 
 export default function Home() {
 
   const [data, setData] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [updated, setUpdated] = useState(true);
+  const [key, setKey] = useState(false);
+  const [passcode, setPasscode] = useState('');
 
   useEffect(async () => {
-      const URL = 'https://api.airtable.com/v0/app7QZH4jTDfsrfbI/source?api_key=keyNpEof0EQueF0sv';
-      const res = await fetch(URL);
-      const data = await res.json();
-      setData(data.records);
-      console.log(data.records);
-  }, [updated]);
+    if(!key)
+      return
+    const URL = 'https://api.airtable.com/v0/app7QZH4jTDfsrfbI/source?api_key=keyNpEof0EQueF0sv';
+    const res = await fetch(URL);
+    const data = await res.json();
+    setData(data.records);
+    console.log(data.records);
+  }, [updated, key]);
 
   useEffect(async () => {
+    if(!key)
+      return;
     const URL = 'https://api.airtable.com/v0/app7QZH4jTDfsrfbI/expenses?sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc&api_key=keyNpEof0EQueF0sv';
     const res = await fetch(URL);
     const data = await res.json();
     setExpenses(data.records);
-}, [updated]);
+}, [updated, key]);
 
   const addExpense = async (date, category, source, amount, description) => {
     const URL = 'https://api.airtable.com/v0/app7QZH4jTDfsrfbI/expenses?api_key=keyNpEof0EQueF0sv';
@@ -108,10 +114,34 @@ export default function Home() {
     })
   }
 
+  const handleKey = (e) => {
+    if(passcode === 'Jaisalmer@1234')
+      setKey(true);
+  }
+
+  const logout = () => {
+    setKey(false);
+    setPasscode('');
+  }
+
   return (
     <div className={styles.container}>
-      <BaseAmount data={data} />
-      <Expenses expenses={expenses} addExpense={addExpense} />
+      {key ? (
+        <>
+          <BaseAmount data={data} logout={logout} />
+          <Expenses expenses={expenses} addExpense={addExpense} />
+        </>
+      ) : (
+        <div className={styles.container}>
+          <h1 className={styles.h1}>
+                <span>
+                    Expense Tracker
+                </span>
+            </h1>
+          <input className={styles.input} type="password" placeholder="Enter passcode to view application" value={passcode} onChange={(e) => setPasscode(e.target.value)}></input>
+          <button className={styles.button} onClick={handleKey}>Submit</button>
+        </div>
+      )}
     </div>
   )
 }

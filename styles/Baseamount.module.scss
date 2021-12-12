@@ -28,6 +28,15 @@
         }
     }
 
+    .logout {
+        cursor: pointer;
+        color: var(--accent-color);
+        width: fit-content;
+        position: absolute;
+        top: 2%;
+        right: 5%;
+    }
+
     .source {
         margin-bottom: 8px;
         width: 100%;
@@ -48,6 +57,14 @@
             &::placeholder {
                 color: var(--primary-text-color);
             }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+       .logout {
+            position: unset;
         }
     }
 }
